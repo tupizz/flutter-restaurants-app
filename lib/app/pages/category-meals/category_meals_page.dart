@@ -13,7 +13,6 @@ class CategoryMealsPage extends StatelessWidget {
 
     final categoryTitle = routeArgs.title;
     final categoryId = routeArgs.id;
-    final categoryColor = routeArgs.color;
 
     final categoryMeals = DUMMY_MEALS
         .where((meal) => meal.categories.contains(categoryId))
