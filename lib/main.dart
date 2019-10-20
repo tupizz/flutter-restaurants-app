@@ -41,6 +41,10 @@ class MyApp extends StatelessWidget {
         CategoryMealsPage.routeName: (ctx) => CategoryMealsPage(),
         MealDetailsPage.routeName: (ctx) => MealDetailsPage(),
       },
+      // 404 like web
+      onUnknownRoute: (setting) {
+        return MaterialPageRoute(builder: (ctx) => CategoriesPage());
+      },
       home: CategoriesPage(),
       debugShowCheckedModeBanner: false,
     );
