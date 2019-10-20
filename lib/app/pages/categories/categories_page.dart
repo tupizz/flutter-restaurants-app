@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import './components/category_item.dart';
 
-import './../../shared/mocks/category_mock.dart';
+import './../../shared/mocks/category_and_meals_mock.dart';
 
 class CategoriesPage extends StatelessWidget {
   @override

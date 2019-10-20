@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_meals_app/app/models/category.dart';
+
+import './components/meal_item.dart';
+import './../../models/category.dart';
+import './../../shared/mocks/category_and_meals_mock.dart';
 
 class CategoryMealsPage extends StatelessWidget {
   static const String routeName = '/category-meals';
@@ -12,11 +15,18 @@ class CategoryMealsPage extends StatelessWidget {
     final categoryId = routeArgs.id;
     final categoryColor = routeArgs.color;
 
+    final categoryMeals = DUMMY_MEALS
+        .where((meal) => meal.categories.contains(categoryId))
+        .toList();
+
     return Scaffold(
       appBar: AppBar(
         title: Text('$categoryTitle'),
       ),
-      body: Container(),
+      body: ListView.builder(
+        itemBuilder: (ctx, index) => MealItem(meal: categoryMeals[index]),
+        itemCount: categoryMeals.length,
+      ),
     );
   }
 }
