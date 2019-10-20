@@ -15,6 +15,7 @@ class CategoriesPage extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         children: DUMMY_CATEGORIES
             .map((categoryData) => CategoryItem(
+                  id: categoryData.id,
                   color: categoryData.color,
                   title: categoryData.title,
                 ))
