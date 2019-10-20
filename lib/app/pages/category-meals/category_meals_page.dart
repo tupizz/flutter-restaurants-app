@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:restaurant_meals_app/app/models/category.dart';
 
 class CategoryMealsPage extends StatelessWidget {
+  static const String routeName = '/category-meals';
+
   @override
   Widget build(BuildContext context) {
     final routeArgs = ModalRoute.of(context).settings.arguments as Category;

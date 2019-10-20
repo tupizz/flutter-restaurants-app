@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
             ),
       ),
       routes: {
-        '/category-meals': (ctx) => CategoryMealsPage(),
+        CategoryMealsPage.routeName: (ctx) => CategoryMealsPage(),
       },
       home: CategoriesPage(),
       debugShowCheckedModeBanner: false,
