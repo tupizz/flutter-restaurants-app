@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import './../../../pages/categories-meals/categories_meals_page.dart';
+import 'package:restaurant_meals_app/app/models/category.dart';
+import './../../../pages/category-meals/category_meals_page.dart';
 
 class CategoryItem extends StatelessWidget {
   final String id;
@@ -10,12 +11,10 @@ class CategoryItem extends StatelessWidget {
   CategoryItem({this.id, this.title, this.color});
 
   void selectCategory(BuildContext ctx) {
-    Navigator.of(ctx).push(MaterialPageRoute(
-      builder: (_) => CategoriesMealsPage(
-        categoryId: id,
-        categoryTitle: title,
-      ),
-    ));
+    Navigator.of(ctx).pushNamed(
+      '/category-meals',
+      arguments: Category(id: this.id, title: this.title, color: this.color),
+    );
   }
 
   @override
