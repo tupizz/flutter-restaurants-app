@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_meals_app/app/models/meal.dart';
 import 'package:tinycolor/tinycolor.dart';
+
+import './../../models/meal.dart';
 import './../../shared/mocks/category_and_meals_mock.dart';
 
 class MealDetailsPage extends StatelessWidget {
