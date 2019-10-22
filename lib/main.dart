@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import './app/pages/category-meals/category_meals_page.dart';
 import './app/pages/meal-details/meal_details_page.dart';
 import './app/pages/tabs/tabs_page.dart';
+import './app/pages/filter/filter_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -37,15 +38,18 @@ class MyApp extends StatelessWidget {
                   ]),
             ),
       ),
+      // home: TabsPage(),
+      initialRoute: '/',
       routes: {
+        '/': (ctx) => TabsPage(),
         CategoryMealsPage.routeName: (ctx) => CategoryMealsPage(),
         MealDetailsPage.routeName: (ctx) => MealDetailsPage(),
+        FilterPage.routeName: (ctx) => FilterPage(),
       },
       // 404 like web
       onUnknownRoute: (setting) {
         return MaterialPageRoute(builder: (ctx) => TabsPage());
       },
-      home: TabsPage(),
       debugShowCheckedModeBanner: false,
     );
   }

@@ -21,6 +21,12 @@ class MealDetailsPage extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             )),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.arrow_back),
+        onPressed: () {
+          Navigator.of(context).pop('Exemplo de voltar passando dados $mealId');
+        },
+      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.only(bottom: 20),
         child: Column(

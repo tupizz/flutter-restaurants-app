@@ -9,10 +9,12 @@ class MealItem extends StatelessWidget {
   MealItem({this.meal});
 
   void selectMeal(BuildContext ctx) {
-    Navigator.of(ctx).pushNamed(
-      MealDetailsPage.routeName,
-      arguments: meal.id,
-    );
+    Navigator.of(ctx)
+        .pushNamed(
+          MealDetailsPage.routeName,
+          arguments: meal.id,
+        )
+        .then((result) => print(result));
   }
 
   @override

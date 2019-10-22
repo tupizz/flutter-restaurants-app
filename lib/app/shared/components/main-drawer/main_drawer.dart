@@ -1,6 +1,38 @@
 import 'package:flutter/material.dart';
 
+import './../../../pages/filter/filter_page.dart';
+
 class MainDrawer extends StatelessWidget {
+  Column buildListItemMenu(
+    String title,
+    IconData icon,
+    BuildContext context,
+    Function tapHandler,
+  ) =>
+      Column(
+        children: <Widget>[
+          ListTile(
+            dense: true,
+            onTap: tapHandler,
+            leading: Icon(
+              icon,
+              size: 20,
+              color: Theme.of(context).primaryColor,
+            ),
+            title: Text(
+              title,
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          Divider(
+            color: Theme.of(context).primaryColor,
+          )
+        ],
+      );
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -25,35 +57,24 @@ class MainDrawer extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          buildListItemMenu('Tipos de Prato', Icons.restaurant, context),
-          buildListItemMenu('Filtros', Icons.filter_list, context),
+          buildListItemMenu(
+            'Tipos de Prato',
+            Icons.restaurant,
+            context,
+            () {
+              Navigator.of(context).pushReplacementNamed('/');
+            },
+          ),
+          buildListItemMenu(
+            'Filtros',
+            Icons.filter_list,
+            context,
+            () {
+              Navigator.of(context).pushReplacementNamed(FilterPage.routeName);
+            },
+          ),
         ],
       ),
     );
   }
-
-  Column buildListItemMenu(String title, IconData icon, BuildContext context) =>
-      Column(
-        children: <Widget>[
-          ListTile(
-            dense: true,
-            onTap: () {},
-            leading: Icon(
-              icon,
-              size: 20,
-              color: Theme.of(context).primaryColor,
-            ),
-            title: Text(
-              title,
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.white,
-              ),
-            ),
-          ),
-          Divider(
-            color: Theme.of(context).primaryColor,
-          )
-        ],
-      );
 }
