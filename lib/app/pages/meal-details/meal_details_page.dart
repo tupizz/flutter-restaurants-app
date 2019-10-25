@@ -22,9 +22,9 @@ class MealDetailsPage extends StatelessWidget {
             )),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.arrow_back),
+        child: Icon(Icons.delete),
         onPressed: () {
-          Navigator.of(context).pop('Exemplo de voltar passando dados $mealId');
+          Navigator.of(context).pop(mealId);
         },
       ),
       body: SingleChildScrollView(

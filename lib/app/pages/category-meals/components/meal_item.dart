@@ -5,8 +5,9 @@ import './../../meal-details/meal_details_page.dart';
 
 class MealItem extends StatelessWidget {
   final Meal meal;
+  final Function removeItemHandler;
 
-  MealItem({this.meal});
+  MealItem({this.meal, this.removeItemHandler});
 
   void selectMeal(BuildContext ctx) {
     Navigator.of(ctx)
@@ -14,7 +15,7 @@ class MealItem extends StatelessWidget {
           MealDetailsPage.routeName,
           arguments: meal.id,
         )
-        .then((result) => print(result));
+        .then((result) => removeItemHandler(result));
   }
 
   @override
