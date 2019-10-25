@@ -24,6 +24,15 @@ class MyApp extends StatelessWidget {
               body2: TextStyle(
                 color: Color.fromRGBO(20, 51, 51, 1),
               ),
+              display1: TextStyle(
+                color: Colors.blue,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+              display2: TextStyle(
+                color: Colors.white70,
+                fontSize: 12,
+              ),
               title: TextStyle(
                   fontSize: 20,
                   fontFamily: 'RobotoCondensed',
