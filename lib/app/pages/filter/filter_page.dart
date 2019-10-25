@@ -5,6 +5,11 @@ import './../../shared/components/main-drawer/main_drawer.dart';
 class FilterPage extends StatefulWidget {
   static const String routeName = '/filter';
 
+  final Function setFilterHandler;
+  var filters;
+
+  FilterPage({this.setFilterHandler, this.filters});
+
   @override
   _FilterPageState createState() => _FilterPageState();
 }
@@ -14,6 +19,16 @@ class _FilterPageState extends State<FilterPage> {
   bool _vegetarian = false;
   bool _vegan = false;
   bool _lactoseFree = false;
+
+  @override
+  void initState() {
+    _glutenFree = widget.filters['gluten'];
+    _vegetarian = widget.filters['vegetarian'];
+    _vegan = widget.filters['vegan'];
+    _lactoseFree = widget.filters['lactose'];
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +59,12 @@ class _FilterPageState extends State<FilterPage> {
                     setState(() {
                       _glutenFree = newValue;
                     });
+                    widget.setFilterHandler(
+                      gluten: _glutenFree,
+                      lactose: _lactoseFree,
+                      vegan: _vegan,
+                      vegetarian: _vegetarian,
+                    );
                   },
                 ),
                 buildSwitchListTile(
@@ -55,6 +76,12 @@ class _FilterPageState extends State<FilterPage> {
                     setState(() {
                       _vegetarian = newValue;
                     });
+                    widget.setFilterHandler(
+                      gluten: _glutenFree,
+                      lactose: _lactoseFree,
+                      vegan: _vegan,
+                      vegetarian: _vegetarian,
+                    );
                   },
                 ),
                 buildSwitchListTile(
@@ -66,6 +93,12 @@ class _FilterPageState extends State<FilterPage> {
                     setState(() {
                       _vegan = newValue;
                     });
+                    widget.setFilterHandler(
+                      gluten: _glutenFree,
+                      lactose: _lactoseFree,
+                      vegan: _vegan,
+                      vegetarian: _vegetarian,
+                    );
                   },
                 ),
                 buildSwitchListTile(
@@ -77,6 +110,12 @@ class _FilterPageState extends State<FilterPage> {
                     setState(() {
                       _lactoseFree = newValue;
                     });
+                    widget.setFilterHandler(
+                      gluten: _glutenFree,
+                      lactose: _lactoseFree,
+                      vegan: _vegan,
+                      vegetarian: _vegetarian,
+                    );
                   },
                 ),
               ],

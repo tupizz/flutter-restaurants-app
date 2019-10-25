@@ -4,10 +4,53 @@ import './app/pages/category-meals/category_meals_page.dart';
 import './app/pages/meal-details/meal_details_page.dart';
 import './app/pages/tabs/tabs_page.dart';
 import './app/pages/filter/filter_page.dart';
+import './app/models/meal.dart';
+import './app/shared/mocks/category_and_meals_mock.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  var _filters = {
+    'gluten': false,
+    'lactose': false,
+    'vegan': false,
+    'vegetarian': false,
+  };
+
+  List<Meal> _availableMeals = DUMMY_MEALS;
+
+  void _setFilters({bool gluten, bool lactose, bool vegan, bool vegetarian}) {
+    setState(() {
+      _filters['gluten'] = gluten;
+      _filters['lactose'] = lactose;
+      _filters['vegan'] = vegan;
+      _filters['vegetarian'] = vegetarian;
+
+      _availableMeals = DUMMY_MEALS.where((meal) {
+        if (_filters['gluten'] && !meal.isGlutenFree) {
+          return false;
+        }
+        if (_filters['lactose'] && !meal.isLactoseFree) {
+          return false;
+        }
+        if (_filters['vegan'] && !meal.isVegan) {
+          return false;
+        }
+        if (_filters['vegetarian'] && !meal.isVegetarian) {
+          return false;
+        }
+
+        return true;
+      }).toList();
+    });
+    print(_filters);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -51,9 +94,13 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (ctx) => TabsPage(),
-        CategoryMealsPage.routeName: (ctx) => CategoryMealsPage(),
+        CategoryMealsPage.routeName: (ctx) =>
+            CategoryMealsPage(_availableMeals),
         MealDetailsPage.routeName: (ctx) => MealDetailsPage(),
-        FilterPage.routeName: (ctx) => FilterPage(),
+        FilterPage.routeName: (ctx) => FilterPage(
+              setFilterHandler: _setFilters,
+              filters: _filters,
+            ),
       },
       // 404 like web
       onUnknownRoute: (setting) {
