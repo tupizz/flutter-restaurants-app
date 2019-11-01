@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 
 import './categories/categories_page.dart';
 import './favorites/favorites_page.dart';
+import './../../models/meal.dart';
 import './../../shared/components/main-drawer/main_drawer.dart';
 
 class TabsPage extends StatefulWidget {
+  final List<Meal> favoriteMeals;
+
+  TabsPage({this.favoriteMeals});
+
   @override
   _TabsPageState createState() => _TabsPageState();
 }
@@ -40,7 +45,7 @@ class _TabsPageState extends State<TabsPage> {
         body: TabBarView(
           children: <Widget>[
             CategoriesPage(),
-            FavoritesPage(),
+            FavoritesPage(favoriteMeals: widget.favoriteMeals),
           ],
         ),
       ),

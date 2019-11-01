@@ -23,6 +23,27 @@ class _MyAppState extends State<MyApp> {
   };
 
   List<Meal> _availableMeals = DUMMY_MEALS;
+  List<Meal> _favoriteMeals = [];
+
+  void _toggleFavorite(String mealId) {
+    final existingIndex =
+        _favoriteMeals.indexWhere((meal) => meal.id == mealId);
+
+    if (existingIndex >= 0) {
+      setState(() {
+        _favoriteMeals.removeAt(existingIndex);
+      });
+    } else {
+      // Sempre que o estado for att o método build irá rodar novamente
+      setState(() {
+        _favoriteMeals.add(DUMMY_MEALS.firstWhere((meal) => meal.id == mealId));
+      });
+    }
+  }
+
+  bool _isMealFavorite(String mealId) {
+    return _favoriteMeals.any((meal) => meal.id == mealId);
+  }
 
   void _setFilters({bool gluten, bool lactose, bool vegan, bool vegetarian}) {
     setState(() {
@@ -93,10 +114,13 @@ class _MyAppState extends State<MyApp> {
       // home: TabsPage(),
       initialRoute: '/',
       routes: {
-        '/': (ctx) => TabsPage(),
+        '/': (ctx) => TabsPage(favoriteMeals: _favoriteMeals),
         CategoryMealsPage.routeName: (ctx) =>
             CategoryMealsPage(_availableMeals),
-        MealDetailsPage.routeName: (ctx) => MealDetailsPage(),
+        MealDetailsPage.routeName: (ctx) => MealDetailsPage(
+              toggleFavorite: _toggleFavorite,
+              isMealFavorite: _isMealFavorite,
+            ),
         FilterPage.routeName: (ctx) => FilterPage(
               setFilterHandler: _setFilters,
               filters: _filters,
