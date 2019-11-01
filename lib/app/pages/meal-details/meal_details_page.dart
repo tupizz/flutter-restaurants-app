@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:tinycolor/tinycolor.dart';
 
-import './../../models/meal.dart';
 import './../../shared/mocks/category_and_meals_mock.dart';
 
 class MealDetailsPage extends StatelessWidget {
+  final Function toggleFavorite;
+  final Function isMealFavorite;
+
+  MealDetailsPage({this.toggleFavorite, this.isMealFavorite});
+
   static const String routeName = '/meal-details';
 
   @override
@@ -21,12 +26,7 @@ class MealDetailsPage extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             )),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.delete),
-        onPressed: () {
-          Navigator.of(context).pop(mealId);
-        },
-      ),
+      floatingActionButton: _getFAB(context, mealId),
       body: SingleChildScrollView(
         padding: EdgeInsets.only(bottom: 20),
         child: Column(
@@ -96,6 +96,47 @@ class MealDetailsPage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _getFAB(BuildContext context, String mealId) {
+    return SpeedDial(
+      animatedIcon: AnimatedIcons.menu_close,
+      animatedIconTheme: IconThemeData(size: 22),
+      backgroundColor: Theme.of(context).primaryColorDark,
+      visible: true,
+      curve: Curves.bounceInOut,
+      children: [
+        // FAB 1
+        SpeedDialChild(
+            child: Icon(Icons.delete),
+            backgroundColor: Colors.red,
+            onTap: () {
+              Navigator.of(context).pop(mealId);
+            },
+            label: 'Excluir',
+            labelStyle: TextStyle(
+                fontWeight: FontWeight.w500,
+                color: Colors.white,
+                fontSize: 16.0),
+            labelBackgroundColor: Colors.red),
+        // FAB 2
+        SpeedDialChild(
+            child: Icon(
+              isMealFavorite(mealId) ? Icons.star : Icons.star_border,
+              color: Colors.black87,
+            ),
+            backgroundColor: Colors.yellow,
+            onTap: () {
+              toggleFavorite(mealId);
+            },
+            label: isMealFavorite(mealId) ? 'Desfavoritar' : 'Favoritar',
+            labelStyle: TextStyle(
+                fontWeight: FontWeight.w500,
+                color: Colors.black87,
+                fontSize: 16.0),
+            labelBackgroundColor: Colors.yellow)
+      ],
     );
   }
 
